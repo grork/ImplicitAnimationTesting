@@ -5,9 +5,19 @@
     xmlns:local="using:ImplicitAnimations"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:dep="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <dep:NavigationView x:Name="NavView"
+                        Loaded="NavView_Loaded"
+                        AlwaysShowHeader="False"
+                        ItemInvoked="NavView_ItemInvoked">
+        <dep:NavigationView.MenuItems>
+            <dep:NavigationViewItem Content="Page1" />
+            <dep:NavigationViewItem Content="Page2" />
+            <dep:NavigationViewItem Content="Page3" />
+        </dep:NavigationView.MenuItems>
 
-    </Grid>
+        <Frame x:Name="MainFrame" />
+    </dep:NavigationView>
 </Page>
