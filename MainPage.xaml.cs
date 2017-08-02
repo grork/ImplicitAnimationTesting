@@ -7,6 +7,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -27,6 +28,16 @@ namespace ImplicitAnimations
         public MainPage()
         {
             this.InitializeComponent();
+
+            SystemNavigationManager.GetForCurrentView().BackRequested += MainPage_BackRequested;
+        }
+
+        private void MainPage_BackRequested(object sender, BackRequestedEventArgs e)
+        {
+            if(MainFrame.CanGoBack)
+            {
+                MainFrame.GoBack();
+            }
         }
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
@@ -52,6 +63,19 @@ namespace ImplicitAnimations
                 case "Page3":
                     this.MainFrame.Navigate(typeof(Pages.Page3));
                     break;
+            }
+        }
+
+        private void MainFrame_Navigated(object sender, NavigationEventArgs e)
+        {
+            var nav = SystemNavigationManager.GetForCurrentView();
+            if(MainFrame.CanGoBack)
+            {
+                nav.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
+            }
+            else
+            {
+                nav.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
             }
         }
     }

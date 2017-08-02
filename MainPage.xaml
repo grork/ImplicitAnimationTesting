@@ -18,6 +18,7 @@
             <dep:NavigationViewItem Content="Page3" />
         </dep:NavigationView.MenuItems>
 
-        <Frame x:Name="MainFrame" />
+        <Frame x:Name="MainFrame"
+               Navigated="MainFrame_Navigated"/>
     </dep:NavigationView>
 </Page>
