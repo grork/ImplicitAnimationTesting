@@ -6,6 +6,7 @@ using System.Numerics;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Composition;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -28,6 +29,19 @@ namespace ImplicitAnimations.Pages
         public PDPPage()
         {
             this.InitializeComponent();
+
+            var data = new List<int>(10);
+            for (int i = 1; i <= 10; i++)
+            {
+                data.Add(i);
+            }
+
+            this.PDPList.ItemsSource = data;
+        }
+
+        private void PDPList_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
+        {
+            args.ItemContainer.Background = (((int)args.Item) % 2 == 0) ? new SolidColorBrush(Colors.LightGray) : new SolidColorBrush(Colors.White);
         }
     }
 }
