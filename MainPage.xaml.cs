@@ -42,8 +42,8 @@ namespace ImplicitAnimations
 
         private void NavView_Loaded(object sender, RoutedEventArgs e)
         {
-            this.NavView.SelectedItem = this.NavView.MenuItems[0];
-            this.MainFrame.Navigate(typeof(Pages.Page1));
+            this.NavView.SelectedItem = this.NavView.MenuItems[1];
+            this.MainFrame.Navigate(typeof(Pages.CollectionPage));
         }
 
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
@@ -52,16 +52,16 @@ namespace ImplicitAnimations
 
             switch(pageName)
             {
-                case "Page1":
-                    this.MainFrame.Navigate(typeof(Pages.Page1));
+                case "TestPage":
+                    this.MainFrame.Navigate(typeof(Pages.TestPage));
                     break;
 
-                case "Page2":
-                    this.MainFrame.Navigate(typeof(Pages.Page2));
+                case "CollectionPage":
+                    this.MainFrame.Navigate(typeof(Pages.CollectionPage));
                     break;
 
-                case "Page3":
-                    this.MainFrame.Navigate(typeof(Pages.Page3));
+                case "PDPPage":
+                    this.MainFrame.Navigate(typeof(Pages.PDPPage));
                     break;
             }
         }

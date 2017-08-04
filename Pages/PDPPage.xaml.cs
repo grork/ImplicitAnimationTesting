@@ -23,21 +23,11 @@ namespace ImplicitAnimations.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class Page3 : Page
+    public sealed partial class PDPPage : Page
     {
-        public Page3()
+        public PDPPage()
         {
             this.InitializeComponent();
-
-            var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
-
-            var showAnimation = compositor.CreateVector3KeyFrameAnimation();
-            showAnimation.InsertKeyFrame(0.0f, new Vector3(0.0f, 1000.0f, 0.0f));
-            showAnimation.InsertKeyFrame(1.0f, new Vector3(0.0f, 0.0f, 0.0f));
-            showAnimation.Target = nameof(Visual.Offset);
-            showAnimation.Duration = TimeSpan.FromSeconds(2.5f);
-
-            ElementCompositionPreview.SetImplicitShowAnimation(this, showAnimation);
         }
     }
 }

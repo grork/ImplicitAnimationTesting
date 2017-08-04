@@ -13,9 +13,9 @@
                         AlwaysShowHeader="False"
                         ItemInvoked="NavView_ItemInvoked">
         <dep:NavigationView.MenuItems>
-            <dep:NavigationViewItem Content="Page1" />
-            <dep:NavigationViewItem Content="Page2" />
-            <dep:NavigationViewItem Content="Page3" />
+            <dep:NavigationViewItem Content="TestPage" />
+            <dep:NavigationViewItem Content="CollectionPage" />
+            <dep:NavigationViewItem Content="PDPPage" />
         </dep:NavigationView.MenuItems>
 
         <Frame x:Name="MainFrame"

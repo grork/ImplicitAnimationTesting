@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="ImplicitAnimations.Pages.Page3"
+    x:Class="ImplicitAnimations.Pages.PDPPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:ImplicitAnimations.Pages"
@@ -18,6 +18,6 @@
                    VerticalAlignment="Stretch"
                    Fill="LightPink" />
 
-        <TextBlock Margin="12">Page3</TextBlock>
+        <TextBlock Margin="12">PDPPage</TextBlock>
     </Grid>
 </Page>
