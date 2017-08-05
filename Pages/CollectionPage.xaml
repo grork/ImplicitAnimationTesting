@@ -12,7 +12,7 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <StackPanel>
+        <StackPanel x:Name="Header" HorizontalAlignment="Stretch" Background="White">
             <TextBlock FontSize="36"
                        Margin="12,12,12,0">Non-Humans</TextBlock>
 
@@ -33,7 +33,7 @@
                   ItemContainerTransitions="{x:Null}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <ItemsWrapGrid Orientation="Horizontal" />
+                    <ItemsWrapGrid Orientation="Horizontal" Background="White" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemContainerStyle>
