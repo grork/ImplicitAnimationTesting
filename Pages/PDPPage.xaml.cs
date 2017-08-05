@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
@@ -42,6 +43,16 @@ namespace ImplicitAnimations.Pages
         private void PDPList_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
         {
             args.ItemContainer.Background = (((int)args.Item) % 2 == 0) ? new SolidColorBrush(Colors.LightGray) : new SolidColorBrush(Colors.White);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            string url = e.Parameter as String ?? "https://placeimg.com/202/202/animals";
+
+            var source = new BitmapImage(new Uri(url));
+            this.Animal.Source = source;
+            this.BackDrop.Source = source;
+            base.OnNavigatedTo(e);
         }
     }
 }

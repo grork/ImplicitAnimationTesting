@@ -1,34 +1,52 @@
 ﻿<Page x:Class="ImplicitAnimations.Pages.CollectionPage"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:ImplicitAnimations.Pages"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:local="using:ImplicitAnimations.Pages"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d">
 
-    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+    <Grid VerticalAlignment="Stretch"
+          HorizontalAlignment="Stretch">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock FontSize="36" Margin="12">CollectionPage</TextBlock>
+        <TextBlock FontSize="36"
+                   Margin="12">CollectionPage</TextBlock>
 
         <ListView x:Name="CollectionList"
-                  Grid.Row="1">
+                  Grid.Row="1"
+                  Padding="6,0,6,0"
+                  ItemClick="CollectionList_ItemClick"
+                  SelectionMode="None"
+                  IsItemClickEnabled="True"
+                  Transitions="{x:Null}"
+                  ItemContainerTransitions="{x:Null}">
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <ItemsWrapGrid Orientation="Horizontal" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="Padding"
+                            Value="0" />
+                    <Setter Property="Margin"
+                            Value="6,6,6,0" />
+                </Style>
+            </ListView.ItemContainerStyle>
 
             <ListView.ItemTemplate>
                 <DataTemplate x:DataType="local:CollectionItem">
                     <StackPanel>
                         <Image Source="{x:Bind Image}"
+                               x:Phase="1"
                                Width="150"
                                Height="150" />
 
-                        <TextBlock Text="{x:Bind Title}" />
+                        <TextBlock Text="{x:Bind Title}"
+                                   Margin="0,6,0,6" />
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>

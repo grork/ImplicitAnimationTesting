@@ -56,5 +56,10 @@ namespace ImplicitAnimations.Pages
                 return items;
             });
         }
+
+        private void CollectionList_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            this.Frame.Navigate(typeof(PDPPage), (e.ClickedItem as CollectionItem).Image);
+        }
     }
 }

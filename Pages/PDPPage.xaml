@@ -18,7 +18,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Image Source="https://placeimg.com/202/202/animals"
+        <Image x:Name="Animal"
                Grid.ColumnSpan="2"
                Height="250"
                HorizontalAlignment="Stretch"
@@ -31,7 +31,7 @@
             </Border.Background>
         </Border>
 
-        <Image Source="https://placeimg.com/202/202/animals"
+        <Image x:Name="BackDrop"
                Width="202"
                Height="202"
                HorizontalAlignment="Center"
@@ -66,7 +66,9 @@
                   Grid.Row="1"
                   Grid.ColumnSpan="2"
                   Background="White"
-                  ContainerContentChanging="PDPList_ContainerContentChanging">
+                  ContainerContentChanging="PDPList_ContainerContentChanging"
+                  Transitions="{x:Null}"
+                  ItemContainerTransitions="{x:Null}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
