@@ -12,11 +12,19 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <TextBlock FontSize="36"
-                   Margin="12">CollectionPage</TextBlock>
+        <StackPanel>
+            <TextBlock FontSize="36"
+                       Margin="12,12,12,0">Non-Humans</TextBlock>
+
+            <Pivot Margin="2,0,6,6">
+                <PivotItem Header="Genus" />
+                <PivotItem Header="Species" />
+                <PivotItem Header="Animals" />
+            </Pivot>
+        </StackPanel>
 
         <ListView x:Name="CollectionList"
-                  Grid.Row="1"
+                  Grid.Row="2"
                   Padding="6,0,6,0"
                   ItemClick="CollectionList_ItemClick"
                   SelectionMode="None"

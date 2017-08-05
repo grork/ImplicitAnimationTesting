@@ -15,6 +15,7 @@
         <dep:NavigationView.MenuItems>
             <dep:NavigationViewItem Content="TestPage" />
             <dep:NavigationViewItem Content="CollectionPage" />
+            <dep:NavigationViewItem Content="CollectionPage1" />
             <dep:NavigationViewItem Content="PDPPage" />
         </dep:NavigationView.MenuItems>
 

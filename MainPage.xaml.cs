@@ -57,6 +57,7 @@ namespace ImplicitAnimations
                     break;
 
                 case "CollectionPage":
+                case "CollectionPage1":
                     this.MainFrame.Navigate(typeof(Pages.CollectionPage));
                     break;
 
