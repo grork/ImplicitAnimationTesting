@@ -22,7 +22,6 @@
                Grid.ColumnSpan="2"
                Height="250"
                HorizontalAlignment="Stretch"
-               
                Stretch="UniformToFill" />
 
         <Border Grid.ColumnSpan="2">

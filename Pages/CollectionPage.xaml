@@ -6,7 +6,32 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Margin="12">
-        <TextBlock FontSize="36">CollectionPage</TextBlock>
+    <Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <TextBlock FontSize="36" Margin="12">CollectionPage</TextBlock>
+
+        <ListView x:Name="CollectionList"
+                  Grid.Row="1">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <ItemsWrapGrid Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:CollectionItem">
+                    <StackPanel>
+                        <Image Source="{x:Bind Image}"
+                               Width="150"
+                               Height="150" />
+
+                        <TextBlock Text="{x:Bind Title}" />
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </Page>
