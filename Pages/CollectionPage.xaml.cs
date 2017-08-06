@@ -30,8 +30,6 @@ namespace ImplicitAnimations.Pages
     /// </summary>
     public sealed partial class CollectionPage : Page
     {
-        static bool s_firstNav = true;
-
         static readonly TimeSpan animationDuration = TimeSpan.FromSeconds(1.0f);
 
         public CollectionPage()
@@ -45,7 +43,7 @@ namespace ImplicitAnimations.Pages
                 this.CollectionList.ItemsSource = result.Result;
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
-            
+
         }
 
         public async Task<IList<CollectionItem>> GenerateData()
@@ -54,7 +52,7 @@ namespace ImplicitAnimations.Pages
             {
                 List<CollectionItem> items = new List<CollectionItem>(500);
 
-                for(int i = 0; i < 500; i++)
+                for (int i = 0; i < 500; i++)
                 {
                     items.Add(new CollectionItem
                     {
@@ -75,13 +73,44 @@ namespace ImplicitAnimations.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
-            if (!s_firstNav)
+            var param = e.Parameter as NavigationParameter;
+
+            if(param != null)
             {
+                this.HeaderText.Text = param.Parameter;
+            }
+
+            if (param != null && param.Direction != LogicalNavigationDirection.None)
+            {
+                string collectionStart = String.Empty;
+                string collectionEnd = String.Empty;
+                string headerStart = String.Empty;
+                string headerEnd = String.Empty;
+
+                switch(param.Direction)
+                {
+                    case LogicalNavigationDirection.Up:
+                        collectionStart = "A.Size.y + this.StartingValue";
+                        collectionEnd = "this.StartingValue";
+
+                        headerStart = "A.Size.y + A.Offset.Y + this.StartingValue";
+                        headerEnd = "this.StartingValue";
+                        break;
+
+                    case LogicalNavigationDirection.Down:
+                        collectionStart = "-(A.Size.y + this.StartingValue)";
+                        collectionEnd = "this.StartingValue"; 
+
+                        headerStart = "-(A.Size.y + this.StartingValue)";
+                        headerEnd = "this.StartingValue";
+                        break;
+                }
+
                 var collectionIntroAnimation = compositor.CreateScalarKeyFrameAnimation();
                 collectionIntroAnimation.Duration = animationDuration;
                 collectionIntroAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.CollectionList));
-                collectionIntroAnimation.InsertExpressionKeyFrame(0.0f, "A.Size.y + this.StartingValue");
-                collectionIntroAnimation.InsertExpressionKeyFrame(1.0f, "this.StartingValue");
+                collectionIntroAnimation.InsertExpressionKeyFrame(0.0f, collectionStart);
+                collectionIntroAnimation.InsertExpressionKeyFrame(1.0f, collectionEnd);
                 collectionIntroAnimation.Target = "Offset.Y";
 
                 ElementCompositionPreview.SetImplicitShowAnimation(this.CollectionList, collectionIntroAnimation);
@@ -89,39 +118,67 @@ namespace ImplicitAnimations.Pages
                 var headerIntroAnimation = compositor.CreateScalarKeyFrameAnimation();
                 headerIntroAnimation.Duration = animationDuration;
                 headerIntroAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.CollectionList));
-                headerIntroAnimation.InsertExpressionKeyFrame(0.0f, "A.Size.y + A.Offset.Y + this.StartingValue");
-                headerIntroAnimation.InsertExpressionKeyFrame(0.01f, "A.Size.y + A.Offset.Y + this.StartingValue");
-                headerIntroAnimation.InsertExpressionKeyFrame(1.0f, "this.StartingValue");
+                headerIntroAnimation.InsertExpressionKeyFrame(0.0f, headerStart);
+                headerIntroAnimation.InsertExpressionKeyFrame(0.01f, headerStart);
+                headerIntroAnimation.InsertExpressionKeyFrame(1.0f, headerEnd);
                 headerIntroAnimation.Target = "Offset.Y";
 
                 ElementCompositionPreview.SetImplicitShowAnimation(this.Header, headerIntroAnimation);
             }
 
-            s_firstNav = false;
             base.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
+            var param = e.Parameter as NavigationParameter;
 
-            var collectionExitAnimation = compositor.CreateScalarKeyFrameAnimation();
-            collectionExitAnimation.Duration = animationDuration;
-            collectionExitAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.CollectionList));
-            collectionExitAnimation.InsertExpressionKeyFrame(0.0f, "this.StartingValue");
-            collectionExitAnimation.InsertExpressionKeyFrame(1.0f, "-(A.Size.y)");
-            collectionExitAnimation.Target = "Offset.Y";
+            if (param != null && param.Direction != LogicalNavigationDirection.None)
+            {
+                string collectionStart = String.Empty;
+                string collectionEnd = String.Empty;
+                string headerStart = String.Empty;
+                string headerEnd = String.Empty;
 
-            ElementCompositionPreview.SetImplicitHideAnimation(this.CollectionList, collectionExitAnimation);
+                switch (param.Direction)
+                {
+                    case LogicalNavigationDirection.Up:
+                        collectionStart = "this.StartingValue";
+                        collectionEnd = "-(A.Size.y)";
 
-            var headerExitAnimation = compositor.CreateScalarKeyFrameAnimation();
-            headerExitAnimation.Duration = animationDuration;
-            headerExitAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.Header));
-            headerExitAnimation.InsertExpressionKeyFrame(0.0f, "this.StartingValue");
-            headerExitAnimation.InsertExpressionKeyFrame(1.0f, "-(A.Size.y)");
-            headerExitAnimation.Target = "Offset.Y";
-            ElementCompositionPreview.SetImplicitHideAnimation(this.Header, headerExitAnimation);
+                        headerStart = "this.StartingValue";
+                        headerEnd = "-(A.Size.y)";
+                        Canvas.SetZIndex(this.Header, 1);
+                        break;
 
+                    case LogicalNavigationDirection.Down:
+                        collectionStart = "this.StartingValue";
+                        collectionEnd = "A.Size.y";
+
+                        headerStart = "this.StartingValue";
+                        headerEnd = "A.Size.y + this.StartingValue";
+                        break;
+                }
+
+                var collectionExitAnimation = compositor.CreateScalarKeyFrameAnimation();
+                collectionExitAnimation.Duration = animationDuration;
+                collectionExitAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.CollectionList));
+                collectionExitAnimation.InsertExpressionKeyFrame(0.0f, collectionStart);
+                collectionExitAnimation.InsertExpressionKeyFrame(1.0f, collectionEnd);
+                collectionExitAnimation.Target = "Offset.Y";
+
+                ElementCompositionPreview.SetImplicitHideAnimation(this.CollectionList, collectionExitAnimation);
+
+                var headerExitAnimation = compositor.CreateScalarKeyFrameAnimation();
+                headerExitAnimation.Duration = animationDuration;
+                headerExitAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.Header));
+                headerExitAnimation.InsertExpressionKeyFrame(0.0f, headerStart);
+                headerExitAnimation.InsertExpressionKeyFrame(1.0f, headerEnd);
+                headerExitAnimation.Target = "Offset.Y";
+                ElementCompositionPreview.SetImplicitHideAnimation(this.Header, headerExitAnimation);
+
+            }
             base.OnNavigatingFrom(e);
         }
     }

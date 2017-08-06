@@ -13,7 +13,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
         <StackPanel x:Name="Header" HorizontalAlignment="Stretch" Background="White">
-            <TextBlock FontSize="36"
+            <TextBlock x:Name="HeaderText"
+                       FontSize="36"
                        Margin="12,12,12,0">Non-Humans</TextBlock>
 
             <Pivot Margin="2,0,6,6">

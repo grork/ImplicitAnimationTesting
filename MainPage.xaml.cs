@@ -20,11 +20,26 @@ using Windows.UI.Xaml.Navigation;
 
 namespace ImplicitAnimations
 {
+    public enum LogicalNavigationDirection
+    {
+        None,
+        Down,
+        Up
+    }
+
+    public class NavigationParameter
+    {
+        public LogicalNavigationDirection Direction = LogicalNavigationDirection.None;
+        public string Parameter;
+    }
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
     public sealed partial class MainPage : Page
     {
+        private NavigationParameter m_previousParameter;
+
         public MainPage()
         {
             this.InitializeComponent();
@@ -58,7 +73,7 @@ namespace ImplicitAnimations
 
                 case "CollectionPage":
                 case "CollectionPage1":
-                    this.MainFrame.Navigate(typeof(Pages.CollectionPage));
+                    this.MainFrame.Navigate(typeof(Pages.CollectionPage), new NavigationParameter { Parameter = pageName });
                     break;
 
                 case "PDPPage":
@@ -77,6 +92,32 @@ namespace ImplicitAnimations
             else
             {
                 nav.AppViewBackButtonVisibility = AppViewBackButtonVisibility.Collapsed;
+            }
+        }
+
+        private void MainFrame_Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            NavigationParameter previousParameter = m_previousParameter;
+            NavigationParameter param = e.Parameter as NavigationParameter;
+            m_previousParameter = param;
+            if(param == null)
+            {
+                // Nothing we can do here
+                return;
+            }
+
+            if(previousParameter == null)
+            {
+                param.Direction = LogicalNavigationDirection.Up;
+            }
+            else if ((param.Parameter == previousParameter.Parameter)
+                || (param.Parameter == "CollectionPage1" && previousParameter.Parameter == "CollectionPage"))
+            {
+                param.Direction = LogicalNavigationDirection.Up;
+            }
+            else if (param.Parameter == "CollectionPage" && previousParameter.Parameter == "CollectionPage1")
+            {
+                param.Direction = LogicalNavigationDirection.Down;
             }
         }
     }
