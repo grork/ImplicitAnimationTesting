@@ -32,6 +32,8 @@ namespace ImplicitAnimations.Pages
     {
         static bool s_firstNav = true;
 
+        static readonly TimeSpan animationDuration = TimeSpan.FromSeconds(1.0f);
+
         public CollectionPage()
         {
             this.InitializeComponent();
@@ -43,49 +45,7 @@ namespace ImplicitAnimations.Pages
                 this.CollectionList.ItemsSource = result.Result;
             }, TaskScheduler.FromCurrentSynchronizationContext());
 
-            var animationDuration = TimeSpan.FromSeconds(1.0f);
-
-            var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
-            if(!s_firstNav)
-            {
-                var collectionIntroAnimation = compositor.CreateScalarKeyFrameAnimation();
-                collectionIntroAnimation.Duration = animationDuration;
-                collectionIntroAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.CollectionList));
-                collectionIntroAnimation.InsertExpressionKeyFrame(0.0f, "A.Size.y + this.StartingValue");
-                collectionIntroAnimation.InsertExpressionKeyFrame(1.0f, "this.StartingValue");
-                collectionIntroAnimation.Target = "Offset.Y";
-
-                ElementCompositionPreview.SetImplicitShowAnimation(this.CollectionList, collectionIntroAnimation);
-
-                var headerIntroAnimation = compositor.CreateScalarKeyFrameAnimation();
-                headerIntroAnimation.Duration = animationDuration;
-                headerIntroAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.CollectionList));
-                headerIntroAnimation.InsertExpressionKeyFrame(0.0f, "A.Size.y + A.Offset.Y + this.StartingValue");
-                headerIntroAnimation.InsertExpressionKeyFrame(0.01f, "A.Size.y + A.Offset.Y + this.StartingValue");
-                headerIntroAnimation.InsertExpressionKeyFrame(1.0f, "this.StartingValue");
-                headerIntroAnimation.Target = "Offset.Y";
-
-                ElementCompositionPreview.SetImplicitShowAnimation(this.Header, headerIntroAnimation);
-            }
-
-            var collectionExitAnimation = compositor.CreateScalarKeyFrameAnimation();
-            collectionExitAnimation.Duration = animationDuration;
-            collectionExitAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.CollectionList));
-            collectionExitAnimation.InsertExpressionKeyFrame(0.0f, "this.StartingValue");
-            collectionExitAnimation.InsertExpressionKeyFrame(1.0f, "-(A.Size.y)");
-            collectionExitAnimation.Target = "Offset.Y";
-
-            ElementCompositionPreview.SetImplicitHideAnimation(this.CollectionList, collectionExitAnimation);
-
-            var headerExitAnimation = compositor.CreateScalarKeyFrameAnimation();
-            headerExitAnimation.Duration = animationDuration;
-            headerExitAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.Header));
-            headerExitAnimation.InsertExpressionKeyFrame(0.0f, "this.StartingValue");
-            headerExitAnimation.InsertExpressionKeyFrame(1.0f, "-(A.Size.y)");
-            headerExitAnimation.Target = "Offset.Y";
-            ElementCompositionPreview.SetImplicitHideAnimation(this.Header, headerExitAnimation);
-
-            s_firstNav = false;
+            
         }
 
         public async Task<IList<CollectionItem>> GenerateData()
@@ -110,6 +70,59 @@ namespace ImplicitAnimations.Pages
         private void CollectionList_ItemClick(object sender, ItemClickEventArgs e)
         {
             this.Frame.Navigate(typeof(PDPPage), (e.ClickedItem as CollectionItem).Image);
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
+            if (!s_firstNav)
+            {
+                var collectionIntroAnimation = compositor.CreateScalarKeyFrameAnimation();
+                collectionIntroAnimation.Duration = animationDuration;
+                collectionIntroAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.CollectionList));
+                collectionIntroAnimation.InsertExpressionKeyFrame(0.0f, "A.Size.y + this.StartingValue");
+                collectionIntroAnimation.InsertExpressionKeyFrame(1.0f, "this.StartingValue");
+                collectionIntroAnimation.Target = "Offset.Y";
+
+                ElementCompositionPreview.SetImplicitShowAnimation(this.CollectionList, collectionIntroAnimation);
+
+                var headerIntroAnimation = compositor.CreateScalarKeyFrameAnimation();
+                headerIntroAnimation.Duration = animationDuration;
+                headerIntroAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.CollectionList));
+                headerIntroAnimation.InsertExpressionKeyFrame(0.0f, "A.Size.y + A.Offset.Y + this.StartingValue");
+                headerIntroAnimation.InsertExpressionKeyFrame(0.01f, "A.Size.y + A.Offset.Y + this.StartingValue");
+                headerIntroAnimation.InsertExpressionKeyFrame(1.0f, "this.StartingValue");
+                headerIntroAnimation.Target = "Offset.Y";
+
+                ElementCompositionPreview.SetImplicitShowAnimation(this.Header, headerIntroAnimation);
+            }
+
+            s_firstNav = false;
+            base.OnNavigatedTo(e);
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
+
+            var collectionExitAnimation = compositor.CreateScalarKeyFrameAnimation();
+            collectionExitAnimation.Duration = animationDuration;
+            collectionExitAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.CollectionList));
+            collectionExitAnimation.InsertExpressionKeyFrame(0.0f, "this.StartingValue");
+            collectionExitAnimation.InsertExpressionKeyFrame(1.0f, "-(A.Size.y)");
+            collectionExitAnimation.Target = "Offset.Y";
+
+            ElementCompositionPreview.SetImplicitHideAnimation(this.CollectionList, collectionExitAnimation);
+
+            var headerExitAnimation = compositor.CreateScalarKeyFrameAnimation();
+            headerExitAnimation.Duration = animationDuration;
+            headerExitAnimation.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.Header));
+            headerExitAnimation.InsertExpressionKeyFrame(0.0f, "this.StartingValue");
+            headerExitAnimation.InsertExpressionKeyFrame(1.0f, "-(A.Size.y)");
+            headerExitAnimation.Target = "Offset.Y";
+            ElementCompositionPreview.SetImplicitHideAnimation(this.Header, headerExitAnimation);
+
+            base.OnNavigatingFrom(e);
         }
     }
 }
