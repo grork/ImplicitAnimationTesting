@@ -18,11 +18,16 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Image x:Name="Animal"
-               Grid.ColumnSpan="2"
-               Height="250"
-               HorizontalAlignment="Stretch"
-               Stretch="UniformToFill" />
+        <Border x:Name="BackdropContainer"
+                Grid.ColumnSpan="2"
+                Grid.RowSpan="2"
+                HorizontalAlignment="Stretch"
+                VerticalAlignment="Stretch">
+            <Image x:Name="BackDrop"
+                   VerticalAlignment="Stretch"
+                   HorizontalAlignment="Stretch"
+                   Stretch="UniformToFill" />
+        </Border>
 
         <Border Grid.ColumnSpan="2">
             <Border.Background>
@@ -31,13 +36,11 @@
             </Border.Background>
         </Border>
 
-        <Image x:Name="BackDrop"
+        <Image x:Name="Animal"
                Width="202"
-               Height="202"
-               HorizontalAlignment="Center"
-               VerticalAlignment="Center"/>
+               Height="202" />
 
-        <StackPanel Grid.Column="1">
+        <StackPanel Grid.Column="1" x:Name="TextContainer">
             <TextBlock Margin="0,24,24,12"
                        Foreground="White"
                        FontWeight="Bold"
@@ -72,7 +75,8 @@
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">
-                        <TextBlock Margin="12" Text="{Binding}"/>
+                        <TextBlock Margin="12"
+                                   Text="{Binding}" />
                         <TextBlock Margin="0,12,12,12">Rock the cashbox</TextBlock>
                     </StackPanel>
                 </DataTemplate>

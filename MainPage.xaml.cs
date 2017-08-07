@@ -77,7 +77,7 @@ namespace ImplicitAnimations
                     break;
 
                 case "PDPPage":
-                    this.MainFrame.Navigate(typeof(Pages.PDPPage));
+                    this.MainFrame.Navigate(typeof(Pages.PDPPage), "https://placeimg.com/202/202/animals");
                     break;
             }
         }

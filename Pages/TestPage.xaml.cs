@@ -53,6 +53,9 @@ namespace ImplicitAnimations.Pages
             rect.Width = rect.Height = 300;
             rect.Fill = new SolidColorBrush(Colors.Orange);
 
+            Visual f = ElementCompositionPreview.GetElementVisual(rect);
+            f.CenterPoint = new Vector3(150.0f, 150.0f, 0.0f);
+
             ElementCompositionPreview.SetImplicitShowAnimation(rect, showAnimation);
             ElementCompositionPreview.SetImplicitHideAnimation(rect, hideAnimation);
 

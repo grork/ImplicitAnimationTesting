@@ -30,7 +30,7 @@ namespace ImplicitAnimations.Pages
     /// </summary>
     public sealed partial class CollectionPage : Page
     {
-        static readonly TimeSpan animationDuration = TimeSpan.FromSeconds(1.0f);
+        public static readonly TimeSpan animationDuration = TimeSpan.FromSeconds(3.0f);
 
         public CollectionPage()
         {
@@ -42,8 +42,6 @@ namespace ImplicitAnimations.Pages
             {
                 this.CollectionList.ItemsSource = result.Result;
             }, TaskScheduler.FromCurrentSynchronizationContext());
-
-
         }
 
         public async Task<IList<CollectionItem>> GenerateData()
@@ -178,6 +176,18 @@ namespace ImplicitAnimations.Pages
                 headerExitAnimation.Target = "Offset.Y";
                 ElementCompositionPreview.SetImplicitHideAnimation(this.Header, headerExitAnimation);
 
+            }
+            else if (e.Parameter is String)
+            {
+                var pageAnimation = compositor.CreateScalarKeyFrameAnimation();
+                pageAnimation.Target = "Opacity";
+                pageAnimation.Duration = animationDuration;
+                pageAnimation.InsertKeyFrame(0.0f, 1.0f);
+
+                pageAnimation.InsertKeyFrame(0.2f, 1.0f);
+                pageAnimation.InsertKeyFrame(1.0f, 0.0f);
+
+                ElementCompositionPreview.SetImplicitHideAnimation(this, pageAnimation);
             }
             base.OnNavigatingFrom(e);
         }
