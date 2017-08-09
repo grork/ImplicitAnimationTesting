@@ -1,4 +1,5 @@
-﻿using Microsoft.UI.Xaml.Controls;
+﻿using ImplicitAnimations.Pages;
+using Microsoft.UI.Xaml.Controls;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -77,7 +78,7 @@ namespace ImplicitAnimations
                     break;
 
                 case "PDPPage":
-                    this.MainFrame.Navigate(typeof(Pages.PDPPage), "https://placeimg.com/202/202/animals");
+                    this.MainFrame.Navigate(typeof(Pages.PDPPage), new PDPNavigation { ImageUri = "https://placeimg.com/202/202/animals" });
                     break;
             }
         }

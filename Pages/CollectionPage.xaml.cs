@@ -30,7 +30,7 @@ namespace ImplicitAnimations.Pages
     /// </summary>
     public sealed partial class CollectionPage : Page
     {
-        public static readonly TimeSpan animationDuration = TimeSpan.FromSeconds(3.0f);
+        public static readonly TimeSpan animationDuration = TimeSpan.FromSeconds(0.5f);
 
         public CollectionPage()
         {
@@ -65,7 +65,11 @@ namespace ImplicitAnimations.Pages
 
         private void CollectionList_ItemClick(object sender, ItemClickEventArgs e)
         {
-            this.Frame.Navigate(typeof(PDPPage), (e.ClickedItem as CollectionItem).Image);
+            UIElement focusedElement = FocusManager.GetFocusedElement() as UIElement;
+
+            var position = focusedElement.TransformToVisual(this);
+            var point = position.TransformPoint(new Point(0.0, 0.0));
+            this.Frame.Navigate(typeof(PDPPage), new PDPNavigation { ImageUri = (e.ClickedItem as CollectionItem).Image, Position = point });
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -177,14 +181,14 @@ namespace ImplicitAnimations.Pages
                 ElementCompositionPreview.SetImplicitHideAnimation(this.Header, headerExitAnimation);
 
             }
-            else if (e.Parameter is String)
+            else if (e.Parameter is PDPNavigation)
             {
                 var pageAnimation = compositor.CreateScalarKeyFrameAnimation();
                 pageAnimation.Target = "Opacity";
                 pageAnimation.Duration = animationDuration;
                 pageAnimation.InsertKeyFrame(0.0f, 1.0f);
 
-                pageAnimation.InsertKeyFrame(0.2f, 1.0f);
+                pageAnimation.InsertKeyFrame(0.1f, 1.0f);
                 pageAnimation.InsertKeyFrame(1.0f, 0.0f);
 
                 ElementCompositionPreview.SetImplicitHideAnimation(this, pageAnimation);

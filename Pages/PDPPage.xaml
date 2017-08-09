@@ -18,7 +18,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border x:Name="BackdropContainer"
+        <Grid x:Name="BackdropContainer"
                 Grid.ColumnSpan="2"
                 Grid.RowSpan="2"
                 HorizontalAlignment="Stretch"
@@ -27,14 +27,16 @@
                    VerticalAlignment="Stretch"
                    HorizontalAlignment="Stretch"
                    Stretch="UniformToFill" />
-        </Border>
 
-        <Border Grid.ColumnSpan="2">
-            <Border.Background>
-                <depMedia:AcrylicBrush TintOpacity="0.3"
-                                       TintColor="Black" />
-            </Border.Background>
-        </Border>
+            <Border>
+                <Border.Background>
+                    <depMedia:AcrylicBrush TintOpacity="0.3"
+                                           TintColor="Black" />
+                </Border.Background>
+            </Border>
+        </Grid>
+
+        
 
         <Image x:Name="Animal"
                Width="202"

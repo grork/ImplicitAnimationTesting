@@ -22,6 +22,12 @@ using Windows.UI.Xaml.Navigation;
 
 namespace ImplicitAnimations.Pages
 {
+    public class PDPNavigation
+    {
+        public string ImageUri;
+        public Point Position;
+    }
+
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
@@ -48,7 +54,8 @@ namespace ImplicitAnimations.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            string url = e.Parameter as String ?? "https://placeimg.com/202/202/animals";
+            PDPNavigation param = e.Parameter as PDPNavigation;
+            string url = param.ImageUri;
 
             var source = new BitmapImage(new Uri(url));
             this.Animal.Source = source;
@@ -87,14 +94,16 @@ namespace ImplicitAnimations.Pages
             var backdropTranslateY = compositor.CreateScalarKeyFrameAnimation();
             backdropTranslateY.Duration = CollectionPage.animationDuration;
             backdropTranslateY.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.BackdropContainer));
-            backdropTranslateY.InsertExpressionKeyFrame(0.0f, "(A.Size.Y * 0.5)");
+            backdropTranslateY.SetScalarParameter("beginY", (float)param.Position.Y);
+            backdropTranslateY.InsertExpressionKeyFrame(0.0f, "beginY");
             backdropTranslateY.InsertExpressionKeyFrame(1.0f, "this.StartingValue");
             backdropTranslateY.Target = "Offset.Y";
 
             var backdropTranslateX = compositor.CreateScalarKeyFrameAnimation();
             backdropTranslateX.Duration = CollectionPage.animationDuration;
             backdropTranslateX.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.BackdropContainer));
-            backdropTranslateX.InsertExpressionKeyFrame(0.0f, "(A.Size.X * 0.4)");
+            backdropTranslateX.SetScalarParameter("beginX", (float)param.Position.X);
+            backdropTranslateX.InsertExpressionKeyFrame(0.0f, "beginX");
             backdropTranslateX.InsertExpressionKeyFrame(1.0f, "this.StartingValue");
             backdropTranslateX.Target = "Offset.X";
 
