@@ -32,6 +32,7 @@ namespace ImplicitAnimations
     {
         public LogicalNavigationDirection Direction = LogicalNavigationDirection.None;
         public string Parameter;
+        public PDPAnimationType PDPAnimation;
     }
 
     /// <summary>
@@ -73,8 +74,19 @@ namespace ImplicitAnimations
                     break;
 
                 case "CollectionPage":
+                    this.MainFrame.Navigate(typeof(Pages.CollectionPage), new NavigationParameter
+                    {
+                        Parameter = pageName,
+                        PDPAnimation = PDPAnimationType.Complex
+                    });
+                    break;
+
                 case "CollectionPage1":
-                    this.MainFrame.Navigate(typeof(Pages.CollectionPage), new NavigationParameter { Parameter = pageName });
+                    this.MainFrame.Navigate(typeof(Pages.CollectionPage), new NavigationParameter
+                    {
+                        Parameter = pageName,
+                        PDPAnimation = PDPAnimationType.Simple
+                    });
                     break;
 
                 case "PDPPage":

@@ -32,6 +32,8 @@ namespace ImplicitAnimations.Pages
     {
         public static readonly TimeSpan animationDuration = TimeSpan.FromSeconds(0.5f);
 
+        private PDPAnimationType m_pageAnimation = PDPAnimationType.Complex;
+
         public CollectionPage()
         {
             this.InitializeComponent();
@@ -69,7 +71,12 @@ namespace ImplicitAnimations.Pages
 
             var position = focusedElement.TransformToVisual(this);
             var point = position.TransformPoint(new Point(0.0, 0.0));
-            this.Frame.Navigate(typeof(PDPPage), new PDPNavigation { ImageUri = (e.ClickedItem as CollectionItem).Image, Position = point });
+            this.Frame.Navigate(typeof(PDPPage), new PDPNavigation
+            {
+                ImageUri = (e.ClickedItem as CollectionItem).Image,
+                Position = point,
+                Animation = m_pageAnimation
+            });
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -80,6 +87,7 @@ namespace ImplicitAnimations.Pages
             if(param != null)
             {
                 this.HeaderText.Text = param.Parameter;
+                this.m_pageAnimation = param.PDPAnimation;
             }
 
             if (param != null && param.Direction != LogicalNavigationDirection.None)

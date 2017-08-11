@@ -22,10 +22,17 @@ using Windows.UI.Xaml.Navigation;
 
 namespace ImplicitAnimations.Pages
 {
+    public enum PDPAnimationType
+    {
+        Complex,
+        Simple
+    }
+
     public class PDPNavigation
     {
         public string ImageUri;
         public Point Position;
+        public PDPAnimationType Animation = PDPAnimationType.Complex;
     }
 
     /// <summary>
@@ -55,12 +62,25 @@ namespace ImplicitAnimations.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             PDPNavigation param = e.Parameter as PDPNavigation;
+
             string url = param.ImageUri;
 
             var source = new BitmapImage(new Uri(url));
             this.Animal.Source = source;
             this.BackDrop.Source = source;
 
+            switch (param.Animation)
+            {
+                case PDPAnimationType.Complex:
+                    this.RunComplexAnimation(param);
+                    break;
+            }
+
+            base.OnNavigatedTo(e);
+        }
+
+        private void RunComplexAnimation(PDPNavigation param)
+        {
             var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
             var collectionStart = "A.Size.y + this.StartingValue";
             var collectionEnd = "this.StartingValue";
@@ -167,8 +187,6 @@ namespace ImplicitAnimations.Pages
             textOpacity.InsertKeyFrame(1.0f, 1.0f);
 
             ElementCompositionPreview.SetImplicitShowAnimation(this.TextContainer, textOpacity);
-
-            base.OnNavigatedTo(e);
         }
     }
 }
