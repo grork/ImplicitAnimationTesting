@@ -5,22 +5,22 @@
     xmlns:local="using:ImplicitAnimations"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:dep="using:Microsoft.UI.Xaml.Controls"
     mc:Ignorable="d">
 
-    <dep:NavigationView x:Name="NavView"
+    <NavigationView x:Name="NavView"
                         Loaded="NavView_Loaded"
                         AlwaysShowHeader="False"
+                        IsBackButtonVisible="Collapsed"
                         ItemInvoked="NavView_ItemInvoked">
-        <dep:NavigationView.MenuItems>
-            <dep:NavigationViewItem Content="TestPage" />
-            <dep:NavigationViewItem Content="CollectionPage" />
-            <dep:NavigationViewItem Content="CollectionPage1" />
-            <dep:NavigationViewItem Content="PDPPage" />
-        </dep:NavigationView.MenuItems>
+        <NavigationView.MenuItems>
+            <NavigationViewItem Content="TestPage" />
+            <NavigationViewItem Content="CollectionPage" />
+            <NavigationViewItem Content="CollectionPage1" />
+            <NavigationViewItem Content="PDPPage" />
+        </NavigationView.MenuItems>
 
         <Frame x:Name="MainFrame"
                Navigated="MainFrame_Navigated"
                Navigating="MainFrame_Navigating"/>
-    </dep:NavigationView>
+    </NavigationView>
 </Page>

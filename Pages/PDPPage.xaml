@@ -4,7 +4,6 @@
       xmlns:local="using:ImplicitAnimations.Pages"
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      xmlns:depMedia="using:Microsoft.UI.Xaml.Media"
       Foreground="White"
       mc:Ignorable="d">
 
@@ -30,8 +29,8 @@
 
             <Border>
                 <Border.Background>
-                    <depMedia:AcrylicBrush TintOpacity="0.3"
-                                           TintColor="Black" />
+                    <AcrylicBrush TintOpacity="0.3"
+                                  TintColor="Black" />
                 </Border.Background>
             </Border>
         </Grid>
