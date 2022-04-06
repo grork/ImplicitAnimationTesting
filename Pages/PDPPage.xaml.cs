@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using System.Numerics;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI;
 using Windows.UI.Composition;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Hosting;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
@@ -22,7 +14,7 @@ using Windows.UI.Xaml.Navigation;
 
 namespace ImplicitAnimations.Pages
 {
-    public enum PDPAnimationType
+    public enum PageAnimationType
     {
         Complex,
         Simple
@@ -32,7 +24,7 @@ namespace ImplicitAnimations.Pages
     {
         public string ImageUri;
         public Point Position;
-        public PDPAnimationType Animation = PDPAnimationType.Complex;
+        public PageAnimationType Animation = PageAnimationType.Complex;
     }
 
     /// <summary>
@@ -71,7 +63,7 @@ namespace ImplicitAnimations.Pages
 
             switch (param.Animation)
             {
-                case PDPAnimationType.Complex:
+                case PageAnimationType.Complex:
                     this.RunComplexAnimation(param);
                     break;
             }
