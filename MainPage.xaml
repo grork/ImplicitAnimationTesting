@@ -6,7 +6,7 @@
                     Loaded="NavView_Loaded"
                     AlwaysShowHeader="False"
                     IsBackButtonVisible="Collapsed"
-                    ItemInvoked="NavView_ItemInvoked">
+                    SelectionChanged="NavView_SelectionChanged">
         <NavigationView.MenuItemTemplate>
             <DataTemplate x:DataType="x:String">
                 <NavigationViewItem Content="{x:Bind}" />

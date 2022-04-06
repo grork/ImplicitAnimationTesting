@@ -73,10 +73,20 @@ namespace ImplicitAnimations
             this.MainFrame.Navigate(typeof(Pages.CollectionPage));
         }
 
+        private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        {
+            var pageName = args.SelectedItem as string;
+            this.NavigateToItem(pageName);
+        }
+
         private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
         {
             var pageName = args.InvokedItem as string;
+            this.NavigateToItem(pageName);
+        }
 
+        private void NavigateToItem(string pageName)
+        {
             // Deduce which page is actually being navigated to
             switch (pageName)
             {
@@ -95,7 +105,7 @@ namespace ImplicitAnimations
                     this.MainFrame.Navigate(typeof(Pages.CollectionPage), new NavigationParameter
                     {
                         PageIdentifier = pageName,
-                        AnimationType = PageAnimationType.Simple
+                        AnimationType = PageAnimationType.Complex
                     });
                     break;
 
