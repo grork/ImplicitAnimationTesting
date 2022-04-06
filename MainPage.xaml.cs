@@ -4,43 +4,11 @@ using System.Linq;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 namespace ImplicitAnimations
 {
-    /// <summary>
-    /// Visually, Navigation has a physicality to it. Code doesn't care.
-    /// We need to represent it in code to ensure we play the right animation.
-    /// </summary>
-    public enum PhysicalNavigationDirection
-    {
-        /// <summary>
-        /// No-known animation directon
-        /// </summary>
-        None,
-
-        /// <summary>
-        /// We're going to an item that is visually 'below' where we are
-        /// </summary>
-        Down,
-
-        /// <summary>
-        /// We're going to an item that is visually 'above' where we are
-        /// </summary>
-        Up
-    }
-
-    /// <summary>
-    /// Container class holding information that the navigation 'manager' can use
-    /// to perform navigation, and derive what animations etc should be.
-    /// </summary>
-    public class NavigationParameter
-    {
-        public string PageIdentifier = "Unknown";
-        public PhysicalNavigationDirection Direction = PhysicalNavigationDirection.None;
-        public PageAnimationType AnimationType = PageAnimationType.Simple;
-    }
-
     public sealed partial class MainPage : Page
     {
         private NavigationParameter m_previousPageParameter;
@@ -98,7 +66,7 @@ namespace ImplicitAnimations
                     this.MainFrame.Navigate(typeof(Pages.CollectionPage), new NavigationParameter {
                         PageIdentifier = pageName,
                         AnimationType = PageAnimationType.Complex
-                    });
+                    }, new SuppressNavigationTransitionInfo());
                     break;
 
                 case PageIdentifiers.CollectionPage2:
@@ -106,7 +74,7 @@ namespace ImplicitAnimations
                     {
                         PageIdentifier = pageName,
                         AnimationType = PageAnimationType.Complex
-                    });
+                    }, new SuppressNavigationTransitionInfo());
                     break;
 
                 case PageIdentifiers.ProductPage:

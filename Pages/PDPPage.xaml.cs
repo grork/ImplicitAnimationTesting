@@ -14,12 +14,6 @@ using Windows.UI.Xaml.Navigation;
 
 namespace ImplicitAnimations.Pages
 {
-    public enum PageAnimationType
-    {
-        Complex,
-        Simple
-    }
-
     public class PDPNavigation
     {
         public string ImageUri;
@@ -43,7 +37,6 @@ namespace ImplicitAnimations.Pages
             }
 
             this.PDPList.ItemsSource = data;
-            Canvas.SetZIndex(this, 11);
         }
 
         private void PDPList_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
@@ -79,7 +72,7 @@ namespace ImplicitAnimations.Pages
 
             // Transform from the bottom
             var listTranslateIn = compositor.CreateScalarKeyFrameAnimation();
-            listTranslateIn.Duration = CollectionPage.animationDuration;
+            listTranslateIn.Duration = Constants.DefaultAnimationDuration;
             listTranslateIn.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.PDPList));
             listTranslateIn.InsertExpressionKeyFrame(0.0f, collectionStart);
             listTranslateIn.InsertExpressionKeyFrame(1.0f, collectionEnd);
@@ -87,7 +80,7 @@ namespace ImplicitAnimations.Pages
 
             // Opacity
             var listFadeIn = compositor.CreateScalarKeyFrameAnimation();
-            listFadeIn.Duration = CollectionPage.animationDuration;
+            listFadeIn.Duration = Constants.DefaultAnimationDuration;
             listFadeIn.Target = "Opacity";
             listFadeIn.InsertKeyFrame(0.0f, 0.0f);
             listFadeIn.InsertKeyFrame(0.5f, 0.0f);
@@ -104,7 +97,7 @@ namespace ImplicitAnimations.Pages
 
             // translate
             var backdropTranslateY = compositor.CreateScalarKeyFrameAnimation();
-            backdropTranslateY.Duration = CollectionPage.animationDuration;
+            backdropTranslateY.Duration = Constants.DefaultAnimationDuration;
             backdropTranslateY.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.BackdropContainer));
             backdropTranslateY.SetScalarParameter("beginY", (float)param.Position.Y);
             backdropTranslateY.InsertExpressionKeyFrame(0.0f, "beginY");
@@ -112,7 +105,7 @@ namespace ImplicitAnimations.Pages
             backdropTranslateY.Target = "Offset.Y";
 
             var backdropTranslateX = compositor.CreateScalarKeyFrameAnimation();
-            backdropTranslateX.Duration = CollectionPage.animationDuration;
+            backdropTranslateX.Duration = Constants.DefaultAnimationDuration;
             backdropTranslateX.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.BackdropContainer));
             backdropTranslateX.SetScalarParameter("beginX", (float)param.Position.X);
             backdropTranslateX.InsertExpressionKeyFrame(0.0f, "beginX");
@@ -126,7 +119,7 @@ namespace ImplicitAnimations.Pages
             backdropScale.InsertExpressionKeyFrame(0.0f, "Vector3(202/A.Size.X, 202 / A.Size.Y, 0.0)");
             backdropScale.InsertKeyFrame(1.0f, new Vector3(1.0f));
             backdropScale.Target = nameof(Visual.Scale);
-            backdropScale.Duration = CollectionPage.animationDuration;
+            backdropScale.Duration = Constants.DefaultAnimationDuration;
 
             backdropEntrance.Add(backdropTranslateY);
             backdropEntrance.Add(backdropTranslateX);
@@ -140,7 +133,7 @@ namespace ImplicitAnimations.Pages
             backdropBottomClip.Target = "BottomInset";
             var clippy = compositor.CreateInsetClip();
             backdropVisual.Clip = clippy;
-            backdropBottomClip.Duration = CollectionPage.animationDuration;
+            backdropBottomClip.Duration = Constants.DefaultAnimationDuration;
             backdropBottomClip.SetReferenceParameter("A", backdropVisual);
             backdropBottomClip.InsertExpressionKeyFrame(0.0f, "0");
             backdropBottomClip.InsertExpressionKeyFrame(1.0f, "(A.Size.Y - 250)");
@@ -152,14 +145,14 @@ namespace ImplicitAnimations.Pages
             // Opacity
             var imageOpacity = compositor.CreateScalarKeyFrameAnimation();
             imageOpacity.Target = "Opacity";
-            imageOpacity.Duration = CollectionPage.animationDuration;
+            imageOpacity.Duration = Constants.DefaultAnimationDuration;
             imageOpacity.InsertKeyFrame(0.0f, 0.0f);
             imageOpacity.InsertKeyFrame(0.5f, 0.0f);
             imageOpacity.InsertKeyFrame(1.0f, 1.0f);
 
             // Transform
             var imageTranslate = compositor.CreateVector3KeyFrameAnimation();
-            imageTranslate.Duration = CollectionPage.animationDuration;
+            imageTranslate.Duration = Constants.DefaultAnimationDuration;
             //imageTranslate.SetReferenceParameter("A", ElementCompositionPreview.GetElementVisual(this.BackdropContainer));
             imageTranslate.InsertExpressionKeyFrame(0.0f, "Vector3(500, 500, -this.StartingValue.Z)");
             imageTranslate.InsertExpressionKeyFrame(1.0f, "this.StartingValue");
@@ -173,7 +166,7 @@ namespace ImplicitAnimations.Pages
             // Text
             var textOpacity = compositor.CreateScalarKeyFrameAnimation();
             textOpacity.Target = "Opacity";
-            textOpacity.Duration = CollectionPage.animationDuration;
+            textOpacity.Duration = Constants.DefaultAnimationDuration;
             textOpacity.InsertKeyFrame(0.0f, 0.0f);
             textOpacity.InsertKeyFrame(0.6f, 0.0f);
             textOpacity.InsertKeyFrame(1.0f, 1.0f);
