@@ -62,12 +62,12 @@
                 <TextBlock VerticalAlignment="Center">Account</TextBlock>
             </StackPanel>
         </StackPanel>
-        <ListView x:Name="PDPList"
+        <ListView x:Name="ItemList"
                   Padding="0,12,0,0"
                   Grid.Row="1"
                   Grid.ColumnSpan="2"
                   Background="White"
-                  ContainerContentChanging="PDPList_ContainerContentChanging"
+                  ContainerContentChanging="ItemList_ContainerContentChanging"
                   Transitions="{x:Null}"
                   ItemContainerTransitions="{x:Null}">
             <ListView.ItemTemplate>

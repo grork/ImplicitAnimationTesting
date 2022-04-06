@@ -6,6 +6,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Hosting;
 using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
 namespace ImplicitAnimations.Pages
@@ -75,7 +76,7 @@ namespace ImplicitAnimations.Pages
                 ImageUri = (e.ClickedItem as CollectionItem).Image, // Image that will be scaled & positioned
                 Position = point, // Position that we want to animate *from*
                 Animation = m_pageAnimation
-            });
+            }, new SuppressNavigationTransitionInfo());
         }
 
         /// <summary>
