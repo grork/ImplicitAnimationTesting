@@ -29,11 +29,6 @@ namespace ImplicitAnimations.Pages
         /// Source coordinate of the animation
         /// </summary>
         public Point Position;
-
-        /// <summary>
-        /// Animation type
-        /// </summary>
-        public PageAnimationType Animation = PageAnimationType.Complex;
     }
 
     public sealed partial class ProductPage : Page
@@ -67,11 +62,7 @@ namespace ImplicitAnimations.Pages
             this.Animal.Source = source;
             this.BackDrop.Source = source;
 
-            // Run the complex animation if, well, it's a complex type.
-            if (param.Animation == PageAnimationType.Complex)
-            {
-                this.RunComplexAnimation(param);
-            }
+            this.RunComplexAnimation(param);
 
             base.OnNavigatedTo(e);
         }
@@ -86,7 +77,7 @@ namespace ImplicitAnimations.Pages
             var collectionEnd = "this.StartingValue";
 
             var listTranslateIn = compositor.CreateScalarKeyFrameAnimation();
-            listTranslateIn.Duration = Constants.DefaultAnimationDuration;
+            listTranslateIn.Duration = Constants.AnimationDuration;
             listTranslateIn.SetReferenceParameter("collection", ElementCompositionPreview.GetElementVisual(this.ItemList));
             listTranslateIn.InsertExpressionKeyFrame(0.0f, collectionStart);
             listTranslateIn.InsertExpressionKeyFrame(1.0f, collectionEnd);
@@ -94,7 +85,7 @@ namespace ImplicitAnimations.Pages
 
             // Fade it in also, to mimize the jarring effect
             var listFadeIn = compositor.CreateScalarKeyFrameAnimation();
-            listFadeIn.Duration = Constants.DefaultAnimationDuration;
+            listFadeIn.Duration = Constants.AnimationDuration;
             listFadeIn.Target = "Opacity";
             listFadeIn.InsertKeyFrame(0.0f, 0.0f);
             listFadeIn.InsertKeyFrame(0.5f, 0.0f);
@@ -115,14 +106,14 @@ namespace ImplicitAnimations.Pages
 
             // Translate it frmo the *source* position
             var backdropTranslateY = compositor.CreateScalarKeyFrameAnimation();
-            backdropTranslateY.Duration = Constants.DefaultAnimationDuration;
+            backdropTranslateY.Duration = Constants.AnimationDuration;
             backdropTranslateY.SetScalarParameter("beginY", (float)param.Position.Y);
             backdropTranslateY.InsertExpressionKeyFrame(0.0f, "beginY");
             backdropTranslateY.InsertExpressionKeyFrame(1.0f, "this.StartingValue");
             backdropTranslateY.Target = "Offset.Y";
 
             var backdropTranslateX = compositor.CreateScalarKeyFrameAnimation();
-            backdropTranslateX.Duration = Constants.DefaultAnimationDuration;
+            backdropTranslateX.Duration = Constants.AnimationDuration;
             backdropTranslateX.SetScalarParameter("beginX", (float)param.Position.X);
             backdropTranslateX.InsertExpressionKeyFrame(0.0f, "beginX");
             backdropTranslateX.InsertExpressionKeyFrame(1.0f, "this.StartingValue");
@@ -135,7 +126,7 @@ namespace ImplicitAnimations.Pages
             backdropScale.InsertExpressionKeyFrame(0.0f, "Vector3(202/backdrop.Size.X, 202 / backdrop.Size.Y, 0.0)");
             backdropScale.InsertKeyFrame(1.0f, new Vector3(1.0f));
             backdropScale.Target = nameof(Visual.Scale);
-            backdropScale.Duration = Constants.DefaultAnimationDuration;
+            backdropScale.Duration = Constants.AnimationDuration;
 
             backdropEntrance.Add(backdropTranslateY);
             backdropEntrance.Add(backdropTranslateX);
@@ -149,7 +140,7 @@ namespace ImplicitAnimations.Pages
             backdropBottomClip.Target = "BottomInset";
             var clippy = compositor.CreateInsetClip();
             backdropVisual.Clip = clippy;
-            backdropBottomClip.Duration = Constants.DefaultAnimationDuration;
+            backdropBottomClip.Duration = Constants.AnimationDuration;
             backdropBottomClip.SetReferenceParameter("backdrop", backdropVisual);
             backdropBottomClip.InsertExpressionKeyFrame(0.0f, "0");
             backdropBottomClip.InsertExpressionKeyFrame(1.0f, "(backdrop.Size.Y - 250)");
@@ -162,14 +153,14 @@ namespace ImplicitAnimations.Pages
             // Opacity
             var imageOpacity = compositor.CreateScalarKeyFrameAnimation();
             imageOpacity.Target = "Opacity";
-            imageOpacity.Duration = Constants.DefaultAnimationDuration;
+            imageOpacity.Duration = Constants.AnimationDuration;
             imageOpacity.InsertKeyFrame(0.0f, 0.0f);
             imageOpacity.InsertKeyFrame(0.5f, 0.0f); // Start the fade part-way through the transition
             imageOpacity.InsertKeyFrame(1.0f, 1.0f);
 
             // Transform to final position
             var imageTranslate = compositor.CreateVector3KeyFrameAnimation();
-            imageTranslate.Duration = Constants.DefaultAnimationDuration;
+            imageTranslate.Duration = Constants.AnimationDuration;
             imageTranslate.InsertExpressionKeyFrame(0.0f, "Vector3(500, 500, -this.StartingValue.Z)");
             imageTranslate.InsertExpressionKeyFrame(1.0f, "this.StartingValue");
             imageTranslate.Target = "Offset";
@@ -184,7 +175,7 @@ namespace ImplicitAnimations.Pages
             // Text should start to fade in halfway through the animation
             var textOpacity = compositor.CreateScalarKeyFrameAnimation();
             textOpacity.Target = "Opacity";
-            textOpacity.Duration = Constants.DefaultAnimationDuration;
+            textOpacity.Duration = Constants.AnimationDuration;
             textOpacity.InsertKeyFrame(0.0f, 0.0f);
             textOpacity.InsertKeyFrame(0.6f, 0.0f);
             textOpacity.InsertKeyFrame(1.0f, 1.0f);

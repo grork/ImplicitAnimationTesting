@@ -1,5 +1,6 @@
 ﻿using System;
 using Windows.ApplicationModel.Activation;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
@@ -25,6 +26,7 @@ namespace ImplicitAnimations
     public static class Constants
     {
         public static readonly TimeSpan DefaultAnimationDuration = TimeSpan.FromSeconds(0.5f);
+        public static TimeSpan AnimationDuration = DefaultAnimationDuration;
     }
 
     /// <summary>
@@ -57,7 +59,6 @@ namespace ImplicitAnimations
     {
         public string PageIdentifier = "Unknown";
         public PhysicalNavigationDirection Direction = PhysicalNavigationDirection.None;
-        public PageAnimationType AnimationType = PageAnimationType.Simple;
     }
 
     sealed partial class App : Application
@@ -82,6 +83,28 @@ namespace ImplicitAnimations
             }
 
             Window.Current.Activate();
+            CoreWindow.GetForCurrentThread().KeyDown += App_KeyDown;
+            CoreWindow.GetForCurrentThread().KeyUp += App_KeyUp;
+        }
+
+        private void App_KeyUp(CoreWindow sender, KeyEventArgs args)
+        {
+            if(args.VirtualKey != Windows.System.VirtualKey.Control)
+            {
+                return;
+            }
+
+            Constants.AnimationDuration = Constants.DefaultAnimationDuration;
+        }
+
+        private void App_KeyDown(CoreWindow sender, KeyEventArgs args)
+        {
+            if (args.VirtualKey != Windows.System.VirtualKey.Control)
+            {
+                return;
+            }
+
+            Constants.AnimationDuration = Constants.DefaultAnimationDuration * 10;
         }
     }
 }

@@ -57,16 +57,14 @@ namespace ImplicitAnimations
 
                 case PageIdentifiers.CollectionPage1:
                     this.MainFrame.Navigate(typeof(Pages.CollectionPage), new NavigationParameter {
-                        PageIdentifier = pageName,
-                        AnimationType = PageAnimationType.Complex
+                        PageIdentifier = pageName
                     }, new SuppressNavigationTransitionInfo());
                     break;
 
                 case PageIdentifiers.CollectionPage2:
                     this.MainFrame.Navigate(typeof(Pages.CollectionPage), new NavigationParameter
                     {
-                        PageIdentifier = pageName,
-                        AnimationType = PageAnimationType.Complex
+                        PageIdentifier = pageName
                     }, new SuppressNavigationTransitionInfo());
                     break;
             }
@@ -97,6 +95,8 @@ namespace ImplicitAnimations
                 // Nothing we can do here
                 return;
             }
+
+            NavView.SelectedItem = param.PageIdentifier;
 
             // Assume if there is no prevous page that there is no animation
             if (previousParameter == null)

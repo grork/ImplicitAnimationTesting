@@ -25,8 +25,6 @@ namespace ImplicitAnimations.Pages
     /// </summary>
     public sealed partial class CollectionPage : Page
     {
-        private PageAnimationType m_pageAnimation = PageAnimationType.Complex;
-
         public CollectionPage()
         {
             this.InitializeComponent();
@@ -75,7 +73,6 @@ namespace ImplicitAnimations.Pages
             {
                 ImageUri = (e.ClickedItem as CollectionItem).Image, // Image that will be scaled & positioned
                 Position = point, // Position that we want to animate *from*
-                Animation = m_pageAnimation
             }, new SuppressNavigationTransitionInfo());
         }
 
@@ -93,7 +90,6 @@ namespace ImplicitAnimations.Pages
             {
                 // Default data
                 this.HeaderText.Text = param.PageIdentifier;
-                this.m_pageAnimation = param.AnimationType;
 
                 // Only if we have a direction should we attempt to configure it
                 if (param.Direction != PhysicalNavigationDirection.None)
@@ -137,7 +133,7 @@ namespace ImplicitAnimations.Pages
 
                     // Animation set on the collection itself
                     var collectionIntroAnimation = compositor.CreateScalarKeyFrameAnimation();
-                    collectionIntroAnimation.Duration = Constants.DefaultAnimationDuration;
+                    collectionIntroAnimation.Duration = Constants.AnimationDuration;
                     collectionIntroAnimation.SetReferenceParameter("collection", ElementCompositionPreview.GetElementVisual(this.CollectionList));
                     collectionIntroAnimation.InsertExpressionKeyFrame(0.0f, collectionStart);
                     collectionIntroAnimation.InsertExpressionKeyFrame(1.0f, collectionEnd);
@@ -147,7 +143,7 @@ namespace ImplicitAnimations.Pages
 
                     // Animation on the header
                     var headerIntroAnimation = compositor.CreateScalarKeyFrameAnimation();
-                    headerIntroAnimation.Duration = Constants.DefaultAnimationDuration;
+                    headerIntroAnimation.Duration = Constants.AnimationDuration;
                     headerIntroAnimation.SetReferenceParameter("collection", ElementCompositionPreview.GetElementVisual(this.CollectionList));
                     headerIntroAnimation.InsertExpressionKeyFrame(0.0f, headerStart);
                     headerIntroAnimation.InsertExpressionKeyFrame(0.01f, headerStart);
@@ -200,7 +196,7 @@ namespace ImplicitAnimations.Pages
                 }
 
                 var collectionExitAnimation = compositor.CreateScalarKeyFrameAnimation();
-                collectionExitAnimation.Duration = Constants.DefaultAnimationDuration;
+                collectionExitAnimation.Duration = Constants.AnimationDuration;
                 collectionExitAnimation.SetReferenceParameter("collection", ElementCompositionPreview.GetElementVisual(this.CollectionList));
                 collectionExitAnimation.InsertExpressionKeyFrame(0.0f, collectionStart);
                 collectionExitAnimation.InsertExpressionKeyFrame(1.0f, collectionEnd);
@@ -209,7 +205,7 @@ namespace ImplicitAnimations.Pages
                 ElementCompositionPreview.SetImplicitHideAnimation(this.CollectionList, collectionExitAnimation);
 
                 var headerExitAnimation = compositor.CreateScalarKeyFrameAnimation();
-                headerExitAnimation.Duration = Constants.DefaultAnimationDuration;
+                headerExitAnimation.Duration = Constants.AnimationDuration;
                 headerExitAnimation.SetReferenceParameter("collection", ElementCompositionPreview.GetElementVisual(this.Header));
                 headerExitAnimation.InsertExpressionKeyFrame(0.0f, headerStart);
                 headerExitAnimation.InsertExpressionKeyFrame(1.0f, headerEnd);
@@ -221,7 +217,7 @@ namespace ImplicitAnimations.Pages
             {
                 var pageAnimation = compositor.CreateScalarKeyFrameAnimation();
                 pageAnimation.Target = "Opacity";
-                pageAnimation.Duration = Constants.DefaultAnimationDuration;
+                pageAnimation.Duration = Constants.AnimationDuration;
                 pageAnimation.InsertKeyFrame(0.0f, 1.0f);
                 // 0.1 is to hold the position for part of the animation to give
                 // a visually staggered effect.
