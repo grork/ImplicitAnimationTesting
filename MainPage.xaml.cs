@@ -69,10 +69,6 @@ namespace ImplicitAnimations
                         AnimationType = PageAnimationType.Complex
                     }, new SuppressNavigationTransitionInfo());
                     break;
-
-                case PageIdentifiers.ProductPage:
-                    this.MainFrame.Navigate(typeof(Pages.ProductPage), new ProductNavigation { ImageUri = "https://placeimg.com/202/202/animals" });
-                    break;
             }
         }
 
