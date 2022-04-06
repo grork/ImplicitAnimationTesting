@@ -82,7 +82,7 @@ namespace ImplicitAnimations.Pages
                 this.m_pageAnimation = param.AnimationType;
             }
 
-            if (param != null && param.Direction != LogicalNavigationDirection.None)
+            if (param != null && param.Direction != PhysicalNavigationDirection.None)
             {
                 string collectionStart = String.Empty;
                 string collectionEnd = String.Empty;
@@ -91,7 +91,7 @@ namespace ImplicitAnimations.Pages
 
                 switch(param.Direction)
                 {
-                    case LogicalNavigationDirection.Up:
+                    case PhysicalNavigationDirection.Up:
                         collectionStart = "A.Size.y + this.StartingValue";
                         collectionEnd = "this.StartingValue";
 
@@ -99,7 +99,7 @@ namespace ImplicitAnimations.Pages
                         headerEnd = "this.StartingValue";
                         break;
 
-                    case LogicalNavigationDirection.Down:
+                    case PhysicalNavigationDirection.Down:
                         collectionStart = "-(A.Size.y + this.StartingValue)";
                         collectionEnd = "this.StartingValue"; 
 
@@ -136,7 +136,7 @@ namespace ImplicitAnimations.Pages
             var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
             var param = e.Parameter as NavigationParameter;
 
-            if (param != null && param.Direction != LogicalNavigationDirection.None)
+            if (param != null && param.Direction != PhysicalNavigationDirection.None)
             {
                 string collectionStart = String.Empty;
                 string collectionEnd = String.Empty;
@@ -145,7 +145,7 @@ namespace ImplicitAnimations.Pages
 
                 switch (param.Direction)
                 {
-                    case LogicalNavigationDirection.Up:
+                    case PhysicalNavigationDirection.Up:
                         collectionStart = "this.StartingValue";
                         collectionEnd = "-(A.Size.y)";
 
@@ -154,7 +154,7 @@ namespace ImplicitAnimations.Pages
                         Canvas.SetZIndex(this.Header, 1);
                         break;
 
-                    case LogicalNavigationDirection.Down:
+                    case PhysicalNavigationDirection.Down:
                         collectionStart = "this.StartingValue";
                         collectionEnd = "A.Size.y";
 

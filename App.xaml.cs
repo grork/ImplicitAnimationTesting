@@ -1,12 +1,17 @@
-﻿using System;
-using Windows.ApplicationModel;
-using Windows.ApplicationModel.Activation;
+﻿using Windows.ApplicationModel.Activation;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Navigation;
 
 namespace ImplicitAnimations
 {
+    internal static class PageIdentifiers
+    {
+        internal const string CollectionPage1 = "collection-page1";
+        internal const string CollectionPage2 = "collection-page2";
+        internal const string TestPage = "test-page";
+        internal const string ProductPage = "product-page";
+    }
+
     sealed partial class App : Application
     {
         public App()
