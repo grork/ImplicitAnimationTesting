@@ -38,18 +38,11 @@ namespace ImplicitAnimations
         {
             // Select the default navigation item as 'CollectionPage' & Navigate to it
             this.NavView.SelectedItem = PageIdentifiers.CollectionPage1;
-            this.MainFrame.Navigate(typeof(Pages.CollectionPage));
         }
 
         private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
         {
             var pageName = args.SelectedItem as string;
-            this.NavigateToItem(pageName);
-        }
-
-        private void NavView_ItemInvoked(NavigationView sender, NavigationViewItemInvokedEventArgs args)
-        {
-            var pageName = args.InvokedItem as string;
             this.NavigateToItem(pageName);
         }
 
