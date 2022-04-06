@@ -70,7 +70,7 @@ namespace ImplicitAnimations.Pages
             var position = focusedElement.TransformToVisual(this);
             var point = position.TransformPoint(new Point(0.0, 0.0));
 
-            this.Frame.Navigate(typeof(PDPPage), new PDPNavigation
+            this.Frame.Navigate(typeof(ProductPage), new ProductNavigation
             {
                 ImageUri = (e.ClickedItem as CollectionItem).Image, // Image that will be scaled & positioned
                 Position = point, // Position that we want to animate *from*
@@ -216,7 +216,7 @@ namespace ImplicitAnimations.Pages
                 ElementCompositionPreview.SetImplicitHideAnimation(this.Header, headerExitAnimation);
 
             }
-            else if (e.Parameter is PDPNavigation)
+            else if (e.Parameter is ProductNavigation)
             {
                 var pageAnimation = compositor.CreateScalarKeyFrameAnimation();
                 pageAnimation.Target = "Opacity";

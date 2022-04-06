@@ -1,11 +1,7 @@
-﻿<Page x:Class="ImplicitAnimations.Pages.PDPPage"
+﻿<Page x:Class="ImplicitAnimations.Pages.ProductPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-      xmlns:local="using:ImplicitAnimations.Pages"
-      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-      Foreground="White"
-      mc:Ignorable="d">
+      Foreground="White">
 
     <Grid VerticalAlignment="Stretch">
         <Grid.RowDefinitions>
@@ -18,10 +14,10 @@
         </Grid.ColumnDefinitions>
 
         <Grid x:Name="BackdropContainer"
-                Grid.ColumnSpan="2"
-                Grid.RowSpan="2"
-                HorizontalAlignment="Stretch"
-                VerticalAlignment="Stretch">
+              Grid.ColumnSpan="2"
+              Grid.RowSpan="2"
+              HorizontalAlignment="Stretch"
+              VerticalAlignment="Stretch">
             <Image x:Name="BackDrop"
                    VerticalAlignment="Stretch"
                    HorizontalAlignment="Stretch"
@@ -35,13 +31,14 @@
             </Border>
         </Grid>
 
-        
+
 
         <Image x:Name="Animal"
                Width="202"
                Height="202" />
 
-        <StackPanel Grid.Column="1" x:Name="TextContainer">
+        <StackPanel Grid.Column="1"
+                    x:Name="TextContainer">
             <TextBlock Margin="0,24,24,12"
                        Foreground="White"
                        FontWeight="Bold"

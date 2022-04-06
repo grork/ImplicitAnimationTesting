@@ -78,7 +78,7 @@ namespace ImplicitAnimations
                     break;
 
                 case PageIdentifiers.ProductPage:
-                    this.MainFrame.Navigate(typeof(Pages.PDPPage), new PDPNavigation { ImageUri = "https://placeimg.com/202/202/animals" });
+                    this.MainFrame.Navigate(typeof(Pages.ProductPage), new ProductNavigation { ImageUri = "https://placeimg.com/202/202/animals" });
                     break;
             }
         }

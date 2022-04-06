@@ -10,11 +10,9 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Imaging;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
-
 namespace ImplicitAnimations.Pages
 {
-    public class PDPNavigation
+    public class ProductNavigation
     {
         public string ImageUri;
         public Point Position;
@@ -24,9 +22,9 @@ namespace ImplicitAnimations.Pages
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class PDPPage : Page
+    public sealed partial class ProductPage : Page
     {
-        public PDPPage()
+        public ProductPage()
         {
             this.InitializeComponent();
 
@@ -46,7 +44,7 @@ namespace ImplicitAnimations.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            PDPNavigation param = e.Parameter as PDPNavigation;
+            ProductNavigation param = e.Parameter as ProductNavigation;
 
             string url = param.ImageUri;
 
@@ -64,7 +62,7 @@ namespace ImplicitAnimations.Pages
             base.OnNavigatedTo(e);
         }
 
-        private void RunComplexAnimation(PDPNavigation param)
+        private void RunComplexAnimation(ProductNavigation param)
         {
             var compositor = ElementCompositionPreview.GetElementVisual(this).Compositor;
             var collectionStart = "A.Size.y + this.StartingValue";
