@@ -22,7 +22,9 @@ There is a left navigation containing 3 pages — two collection pages, and a te
 
 ### Animations
 - Collection-to-Collection translates up/down (Depending on the direction), as well as a staggered animation of the header
-- Collection-to-Product Page will animate the image of the tile to top-left *from it’s originating position**, and also scale up a backdrop behind the the header while performing a clip
+- Collection-to-Product Page will animate the image of the tile to top-left *from it’s originating position*, and also scale up a backdrop behind the the header while performing a clip
+
+https://user-images.githubusercontent.com/1811056/162288618-940a6548-a7be-4d8d-bfdf-e1afca4e5613.mp4
 
 ### Notes
 - Holding Control when causing an animation to start will slow the animation down 10x. The default length is 0.5s, so will be extended to 5s
