@@ -11,7 +11,7 @@
         </Grid.RowDefinitions>
         <StackPanel x:Name="Header"
                     HorizontalAlignment="Stretch"
-                    Background="White">
+                    Background="{ThemeResource ControlSolidFillColorDefault}">
             <TextBlock x:Name="HeaderText"
                        FontSize="36"
                        Margin="12,12,12,0">Non-Humans</TextBlock>
@@ -34,7 +34,7 @@
             <ListView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <ItemsWrapGrid Orientation="Horizontal"
-                                   Background="White" />
+                                   Background="{ThemeResource ControlSolidFillColorDefault}" />
                 </ItemsPanelTemplate>
             </ListView.ItemsPanel>
             <ListView.ItemContainerStyle>

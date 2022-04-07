@@ -6,6 +6,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using muxc = Microsoft.UI.Xaml.Controls;
 
 namespace ImplicitAnimations
 {
@@ -40,7 +41,7 @@ namespace ImplicitAnimations
             this.NavView.SelectedItem = PageIdentifiers.CollectionPage1;
         }
 
-        private void NavView_SelectionChanged(NavigationView sender, NavigationViewSelectionChangedEventArgs args)
+        private void NavView_SelectionChanged(muxc.NavigationView sender, muxc.NavigationViewSelectionChangedEventArgs args)
         {
             var pageName = args.SelectedItem as string;
             this.NavigateToItem(pageName);

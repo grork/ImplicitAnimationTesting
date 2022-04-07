@@ -1,20 +1,21 @@
 ﻿<Page x:Class="ImplicitAnimations.MainPage"
       xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:controls="using:Microsoft.UI.Xaml.Controls">
 
-    <NavigationView x:Name="NavView"
+    <controls:NavigationView x:Name="NavView"
                     Loaded="NavView_Loaded"
                     AlwaysShowHeader="False"
                     IsBackButtonVisible="Collapsed"
                     SelectionChanged="NavView_SelectionChanged">
-        <NavigationView.MenuItemTemplate>
+        <controls:NavigationView.MenuItemTemplate>
             <DataTemplate x:DataType="x:String">
-                <NavigationViewItem Content="{x:Bind}" />
+                <controls:NavigationViewItem Content="{x:Bind}" />
             </DataTemplate>
-        </NavigationView.MenuItemTemplate>
+        </controls:NavigationView.MenuItemTemplate>
 
         <Frame x:Name="MainFrame"
                Navigated="MainFrame_Navigated"
                Navigating="MainFrame_Navigating" />
-    </NavigationView>
+    </controls:NavigationView>
 </Page>

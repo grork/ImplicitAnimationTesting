@@ -49,7 +49,7 @@ namespace ImplicitAnimations.Pages
         private void ItemList_ContainerContentChanging(ListViewBase sender, ContainerContentChangingEventArgs args)
         {
             // Simplistic stripe effect behind the liste items
-            args.ItemContainer.Background = (((int)args.Item) % 2 == 0) ? new SolidColorBrush(Colors.LightGray) : new SolidColorBrush(Colors.White);
+            args.ItemContainer.Background = (((int)args.Item) % 2 == 0) ? new SolidColorBrush(Color.FromArgb(51, 170, 170, 170)) : null;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
